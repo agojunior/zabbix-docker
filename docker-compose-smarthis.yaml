@@ -116,9 +116,7 @@ services:
 
  zabbix-agent:
   image: zabbix/zabbix-agent:ubuntu-6.4-latest
-  profiles:
-   - full
-   - all
+ 
   ports:
    - "10050:10050"
   volumes:
@@ -156,9 +154,7 @@ services:
 
  zabbix-web-service:
   image: zabbix/zabbix-web-service:ubuntu-6.4-latest
-  profiles:
-   - full
-   - all
+
   ports:
    - "10053:10053"
   volumes:
@@ -186,31 +182,6 @@ services:
    com.zabbix.company: "Zabbix LLC"
    com.zabbix.component: "web-service"
    com.zabbix.os: "ubuntu"
-
- mysql-server:
-  image: mysql:8.0-oracle
-  profiles:
-   - all
-  command:
-   - mysqld
-   - --character-set-server=utf8mb4
-   - --collation-server=utf8mb4_bin
-   - --default-authentication-plugin=mysql_native_password
-  volumes:
-   - ./zbx_env/var/lib/mysql:/var/lib/mysql:rw
-  env_file:
-   - ./env_vars/.env_db_mysql
-  secrets:
-   - MYSQL_USER
-   - MYSQL_PASSWORD
-   - MYSQL_ROOT_PASSWORD
-  stop_grace_period: 1m
-  networks:
-   zbx_net_backend:
-    aliases:
-     - mysql-server
-     - zabbix-database
-     - mysql-database
 
  db_data_pgsql:
   image: busybox
