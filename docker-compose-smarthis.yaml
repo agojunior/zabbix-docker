@@ -150,39 +150,7 @@ services:
    com.zabbix.company: "Zabbix LLC"
    com.zabbix.component: "zabbix-agentd"
    com.zabbix.os: "ubuntu"
-
-
- zabbix-web-service:
-  image: zabbix/zabbix-web-service:ubuntu-6.4-latest
-
-  ports:
-   - "10053:10053"
-  volumes:
-   - ./zbx_env/var/lib/zabbix/enc:/var/lib/zabbix/enc:ro
-  security_opt:
-   - seccomp:./env_vars/chrome_dp.json
-  deploy:
-   resources:
-    limits:
-      cpus: '0.5'
-      memory: 512M
-    reservations:
-      cpus: '0.25'
-      memory: 256M
-  env_file:
-   - ./env_vars/.env_web_service
-  networks:
-   zbx_net_backend:
-    aliases:
-     - zabbix-web-service
-     - zabbix-web-service-ubuntu
-  stop_grace_period: 5s
-  labels:
-   com.zabbix.description: "Zabbix web service"
-   com.zabbix.company: "Zabbix LLC"
-   com.zabbix.component: "web-service"
-   com.zabbix.os: "ubuntu"
-
+ 
  db_data_pgsql:
   image: busybox
   volumes:
