@@ -15,6 +15,10 @@ services:
    - ./zbx_env/var/lib/zabbix/ssh_keys:/var/lib/zabbix/ssh_keys:ro
    - ./zbx_env/var/lib/zabbix/mibs:/var/lib/zabbix/mibs:ro
    - snmptraps:/var/lib/zabbix/snmptraps:rw
+#   - /etc/letsencrypt:/etc/letsencrypt
+#   - ./:/etc/letsencrypt/live/zabbix.hub.smarthis.com.br/chain.pem:ro
+#   - ./:/etc/letsencrypt/live/zabbix.hub.smarthis.com.br/fullchain.pem:ro
+#   - ./:/etc/letsencrypt/live/zabbix.hub.smarthis.com.br/privkey.pem:ro
 #   - ./env_vars/.ZBX_DB_CA_FILE:/run/secrets/root-ca.pem:ro
 #   - ./env_vars/.ZBX_DB_CERT_FILE:/run/secrets/client-cert.pem:ro
 #   - ./env_vars/.ZBX_DB_KEY_FILE:/run/secrets/client-key.pem:ro
@@ -69,8 +73,12 @@ services:
    - "443:8443"
   volumes:
    - /etc/localtime:/etc/localtime:ro
-   - ./zbx_env/etc/ssl/nginx:/etc/ssl/nginx:ro
+#   - ./zbx_env/etc/ssl/nginx:/etc/ssl/nginx:ro
+   - /etc/letsencrypt/live/zabbix.hub.smarthis.com.br:/etc/ssl/nginx:ro
    - ./zbx_env/usr/share/zabbix/modules/:/usr/share/zabbix/modules/:ro
+   #- /etc/letsencrypt:/etc/letsencrypt
+   #- ./nginx:/etc/nginx/conf.d
+#   - ./ngnix/conf/:etc/ngnix/conf.d/:ro
 #   - ./env_vars/.ZBX_DB_CA_FILE:/run/secrets/root-ca.pem:ro
 #   - ./env_vars/.ZBX_DB_CERT_FILE:/run/secrets/client-cert.pem:ro
 #   - ./env_vars/.ZBX_DB_KEY_FILE:/run/secrets/client-key.pem:ro
